@@ -17,6 +17,7 @@ jobs:
         uses: onichandame/go-release-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          ldflags: "-linkmode external -extldflags -static"
           goarch: ${{ matrix.arch }}
           goos: ${{ matrix.os }}
+        env:
+          CGO_ENABLED: 0

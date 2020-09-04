@@ -16,6 +16,7 @@ jobs:
       - name: build and release
         uses: ngs/go-release.action@v1.0.1
         env:
+          CMD_PATH: '-ldflags "-linkmode external -extldflags -static"'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOARCH: ${{ matrix.arch }}
           GOOS: ${{ matrix.os }}

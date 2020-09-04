@@ -16,7 +16,7 @@ jobs:
       - name: build and release
         uses: wangyoucao577/go-release-action@master@v1.6
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           build_flags: '-ldflags "-linkmode external -extldflags -static"'
           goarch: ${{ matrix.arch }}
           goos: ${{ matrix.os }}

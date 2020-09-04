@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build and release
-        uses: ngs/go-release.action@v1.0.1
+        uses: wangyoucao577/go-release-action@master@v1.6
         env:
-          CMD_PATH: '-ldflags "-linkmode external -extldflags -static"'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GOARCH: ${{ matrix.arch }}
-          GOOS: ${{ matrix.os }}
+          build_flags: '-ldflags "-linkmode external -extldflags -static"'
+          goarch: ${{ matrix.arch }}
+          goos: ${{ matrix.os }}

@@ -1,5 +1,8 @@
 name: deploy
-on: release
+on:
+  release:
+    types: [published]
+
 jobs:
   release:
     runs-on: ubuntu-latest

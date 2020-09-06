@@ -13,25 +13,26 @@ var count = 0
 var max = 100
 
 var rootCmd = &cobra.Command{
-	Use:   "retry",
-	Args:  cobra.MinimumNArgs(1),
-	Short: "retry a command on failure",
-	Long:  "re-run a command until it is successful or 100 tries all failed",
+	Use:                "retry",
+	Args:               cobra.MinimumNArgs(1),
+	DisableFlagParsing: true,
+	Short:              "retry a command on failure",
+	Long:               "re-run a command until it is successful or 100 tries all failed",
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error = errors.New("nil")
 		for count < max && err != nil {
 			count++
 			log.Printf("%v/%v run starts", count, max)
-			cmd := exec.Command(os.Args[1], os.Args[2:]...)
+			cmd := exec.Command(args[0], args[1:]...)
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 			err = cmd.Run()
 			log.Printf("%v/%v run finishes", count, max)
 		}
 		if err == nil {
-			log.Printf("completed %v/%v", count, max)
+			log.Printf("command \"%v\" completed %v/%v", strings.Join(args, " "), count, max)
 		} else {
-			log.Fatalf("command \"%v\" failed", strings.Join(os.Args, " "))
+			log.Fatalf("command \"%v\" failed", strings.Join(args, " "))
 		}
 	},
 }
